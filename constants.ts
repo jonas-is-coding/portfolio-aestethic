@@ -1,3 +1,5 @@
+export const baseUrl = "https://jonasbrahmst.vercel.app"
+
 export const services = [
     {
         title: "Web Development",

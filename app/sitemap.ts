@@ -1,28 +1,30 @@
+import { baseUrl } from "@/constants";
+
 // sitemap.ts
 export default async function sitemap() {
     return [
         {
-            url: 'https://jonasbrahmst.com/',
+            url: baseUrl,
             lastModified: new Date().toISOString(), 
         },
         {
-            url: 'https://jonasbrahmst.com/about',
+            url: `${baseUrl}/about`,
             lastModified: new Date().toISOString(), 
         },
         {
-            url: 'https://jonasbrahmst.com/projects',
+            url: `${baseUrl}/projects`,
             lastModified: new Date().toISOString(), 
         },
         {
-            url: 'https://jonasbrahmst.com/releases',
+            url: `${baseUrl}/releases`,
             lastModified: new Date().toISOString(), 
         },
         {
-            url: 'https://jonasbrahmst.com/blog',
+            url: `${baseUrl}/blog`,
             lastModified: new Date().toISOString(), 
         },
         {
-            url: 'https://jonasbrahmst.com/contact',
+            url: `${baseUrl}/contact`,
             lastModified: new Date().toISOString(), 
         },
     ];
