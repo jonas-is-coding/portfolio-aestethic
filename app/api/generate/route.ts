@@ -5,17 +5,23 @@ import { sendMessage } from "@/content/message";
 
 export async function POST(req: NextRequest) {
   try {
+    console.log("Starting POST request...");
+
     const content = await createContent();
+    console.log("Content created:", content);
 
     const imageUrl = await buildDesign("Figma_Tip", {
       id: "figma_text_id",
       content,
     });
+    console.log("Image URL:", imageUrl);
 
     if (imageUrl) {
       await sendMessage(content, imageUrl);
+      console.log("Message sent with image.");
     } else {
       await sendMessage(content);
+      console.log("Message sent without image.");
     }
 
     return NextResponse.json({
