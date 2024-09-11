@@ -51,13 +51,19 @@ export async function createContent(): Promise<string> {
     model: "gemini-1.5-pro",
     generationConfig,
   });
-  const convo = model.startChat({ history: [] });
-  const response = await convo.sendMessage(categoryPrompt);
 
-  // Entferne Platzhalter
-  const finalResponse = response.response.text.toString()
-    .replace("{figma_part}", `Part ${currentFigmaPart - 1}`)
-    .replace("{vscode_part}", `Part ${currentVscodePart - 1}`);
+  const result = await model.generateContent(categoryPrompt);
+  const response = await result.response;
 
-  return finalResponse;
+  // Überprüfe, ob response.text eine Funktion ist
+  if (typeof response.text === "function") {
+    const responseText = (response.text as unknown as () => string)();
+    const finalResponse = responseText
+      .replace("{figma_part}", `Part ${currentFigmaPart - 1}`)
+      .replace("{vscode_part}", `Part ${currentVscodePart - 1}`);
+
+    return finalResponse;
+  } else {
+    throw new Error("Response text is not a function or not a string.");
+  }
 }
