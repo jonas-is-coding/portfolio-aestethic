@@ -1,10 +1,13 @@
-require("dotenv").config();
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require("twilio")(accountSid, authToken);
+import dotenv from "dotenv";
+import twilio from "twilio";
 
 export async function sendMessage(message: string, imageUrl?: string) {
+  dotenv.config();
+
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const client = twilio(accountSid, authToken);
+
   if (imageUrl) {
     client.messages.create({
       from: "whatsapp:+14155238886",

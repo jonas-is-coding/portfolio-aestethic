@@ -7,7 +7,6 @@ export async function POST(req: NextRequest) {
   try {
     const content = await createContent();
 
-    // Simuliere das Erstellen des Designs und erhalte die Bild-URL
     const imageUrl = await buildDesign("Figma_Tip", {
       id: "figma_text_id",
       content,
