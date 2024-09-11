@@ -9,7 +9,7 @@ interface TrendTipProps {
 
 const Trend_Tip = ({ title, category }: TrendTipProps) => {
   return (
-    <div className="w-[540px] h-[675px] bg-black relative">
+    <div className="w-[1080px] h-[1350px] bg-black relative">
       <div className="absolute left-6 bottom-24 flex flex-col items-start justify-end gap-2">
         <img src="/save-swipe.png" className="w-[143px] h-[98px]" />
         <h3 className={cn("text-[92px] z-40 leading-[0.9] uppercase bg-gradient-to-br from-gray-50 via-amber-500 to-gray-50 bg-clip-text text-transparent", sfcompactdisplaybold.className)}>

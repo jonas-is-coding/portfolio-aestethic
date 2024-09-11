@@ -1,29 +1,22 @@
-require('dotenv').config(); // Stelle sicher, dass .env-Datei geladen wird
-
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
-async function renderComponent(identifier, componentFile) {
+async function renderComponent(partNumber, componentFile) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   // Setze die Viewport-Größe auf die Größe deiner Komponenten
-  await page.setViewport({ width: 540, height: 675 });
+  await page.setViewport({ width: 1080, height: 1350 });
 
-  // Erstelle die URL basierend auf dem Typ der Komponente
-  let url;
-  if (componentFile === "Other_Tip") {
-    url = `${process.env.NEXT_PUBLIC_URL}/screenshot/Other_Tip/${encodeURIComponent(identifier)}`;
-  } else if (componentFile === "Figma_Tip" || componentFile === "VSCode_Tip") {
-    url = `${process.env.NEXT_PUBLIC_URL}/screenshot/${componentFile}/${encodeURIComponent(identifier)}`;
-  } else {
-    throw new Error(`Unbekannter componentFile-Typ: ${componentFile}`);
-  }
-
-  console.log(`Navigating to: ${url}`);
-  await page.goto(url); // Stelle sicher, dass die URL korrekt ist
+  // Lade die React-App
+  await page.goto(
+    "https://jonasbrahmst.vercel.app/screenshot/" +
+      componentFile +
+      "/" +
+      partNumber
+  ); // Stelle sicher, dass die URL korrekt ist
 
   // Warte, bis die Seite geladen ist
   await setTimeout(3000);
@@ -37,7 +30,7 @@ async function renderComponent(identifier, componentFile) {
   // Nimm einen Screenshot des gesamten Inhalts, der dem Viewport entspricht
   const screenshotPath = path.join(
     screenshotsDir,
-    `${componentFile}_${identifier}.png`
+    `${componentFile}_part_${partNumber}.png`
   );
   await page.screenshot({ path: screenshotPath });
 
@@ -45,10 +38,10 @@ async function renderComponent(identifier, componentFile) {
   return screenshotPath;
 }
 
-const identifier = process.argv[2];
+const partNumber = process.argv[2];
 const componentFile = process.argv[3];
 
-renderComponent(identifier, componentFile)
+renderComponent(partNumber, componentFile)
   .then((screenshotPath) =>
     console.log(`Screenshot gespeichert unter: ${screenshotPath}`)
   )

@@ -9,7 +9,7 @@ interface VSCodeTipProps {
 
 const VSCode_Tip = ({ partNumber }: VSCodeTipProps) => {
   return (
-    <div className="w-[540px] h-[675px] bg-black relative">
+    <div className="w-[1080px] h-[1350px] bg-black relative">
       <header
         className={cn(
           "absolute top-0 left-0 w-full flex items-center justify-between px-6 pt-8 text-white",
