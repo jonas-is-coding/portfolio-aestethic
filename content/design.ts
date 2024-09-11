@@ -21,7 +21,7 @@ export async function buildDesign(category: string, data: { id: string; content:
   try {
     const { stdout } = await execPromise(`node ./content/render.js ${partNumber} ${componentFile}`);
     console.log(stdout);
-    const screenshotPath = `@/content/screenshots/${category.toLowerCase()}_part_${partNumber}.png`;
+    const screenshotPath = `${category.toLowerCase()}_part_${partNumber}.png`;
     return screenshotPath;
   } catch (error) {
     console.error('Fehler beim Rendern der Komponente:', error);

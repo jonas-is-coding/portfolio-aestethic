@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     console.log("Image URL:", imageUrl);
 
     if (imageUrl) {
-      await sendMessage(content, imageUrl);
+      await sendMessage(content, `./screenshots/${imageUrl}`);
       console.log("Message sent with image.");
     } else {
       await sendMessage(content);
