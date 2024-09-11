@@ -4,7 +4,7 @@ const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
 async function renderComponent(partNumber, componentFile) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true});
   const page = await browser.newPage();
 
   // Setze die Viewport-Größe auf die Größe deiner Komponenten
