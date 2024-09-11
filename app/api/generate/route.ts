@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createContent } from "@/content/content";
 import { buildDesign } from "@/content/design";
 import { sendMessage } from "@/content/message";
+import { upload } from "@/content/upload";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,10 +11,13 @@ export async function POST(req: NextRequest) {
     const content = await createContent();
     console.log("Content created:", content);
 
-    const imageUrl = await buildDesign("Figma_Tip", {
+    const design = await buildDesign("Figma_Tip", {
       id: "figma_text_id",
       content,
     });
+
+    const imageUrl = await upload(design!)
+
     console.log("Image URL:", imageUrl);
 
     if (imageUrl) {

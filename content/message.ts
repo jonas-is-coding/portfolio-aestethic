@@ -9,7 +9,7 @@ export async function sendMessage(message: string, imageUrl?: string) {
   const client = twilio(accountSid, authToken);
 
   if (imageUrl) {
-    client.messages.create({
+    await client.messages.create({
       from: "whatsapp:+14155238886",
       body: message,
       to: `whatsapp:${process.env.PHONE_NUMBER}`,
