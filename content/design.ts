@@ -16,11 +16,9 @@ const componentMapping: ComponentMapping = {
 export async function buildDesign(category: string, data: { id: string; content: string }): Promise<string | null> {
   const partNumber = data.content.split('Part ').pop() || '';
   
-  // Verwende eine Indexsignatur für componentMapping
   const componentFile = componentMapping[category] || "Figma_Tip";
 
   try {
-    // Generiere den Pfad zur Komponente, die gerendert werden soll
     const { stdout } = await execPromise(`node ./content/render.js ${partNumber} ${componentFile}`);
     console.log(stdout);
     const screenshotPath = `${category.toLowerCase()}_part_${partNumber}.png`;

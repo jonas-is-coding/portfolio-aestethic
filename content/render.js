@@ -1,3 +1,5 @@
+require('dotenv').config(); // Stelle sicher, dass .env-Datei geladen wird
+
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
@@ -10,10 +12,18 @@ async function renderComponent(identifier, componentFile) {
   // Setze die Viewport-Größe auf die Größe deiner Komponenten
   await page.setViewport({ width: 540, height: 675 });
 
-  // Lade die React-App
-  await page.goto(
-    `${process.env.NEXT_PUBLIC_URL}/screenshot/${componentFile}/${identifier}`
-  ); // Stelle sicher, dass die URL korrekt ist
+  // Erstelle die URL basierend auf dem Typ der Komponente
+  let url;
+  if (componentFile === "Other_Tip") {
+    url = `${process.env.NEXT_PUBLIC_URL}/screenshot/Other_Tip/${encodeURIComponent(identifier)}`;
+  } else if (componentFile === "Figma_Tip" || componentFile === "VSCode_Tip") {
+    url = `${process.env.NEXT_PUBLIC_URL}/screenshot/${componentFile}/${encodeURIComponent(identifier)}`;
+  } else {
+    throw new Error(`Unbekannter componentFile-Typ: ${componentFile}`);
+  }
+
+  console.log(`Navigating to: ${url}`);
+  await page.goto(url); // Stelle sicher, dass die URL korrekt ist
 
   // Warte, bis die Seite geladen ist
   await setTimeout(3000);

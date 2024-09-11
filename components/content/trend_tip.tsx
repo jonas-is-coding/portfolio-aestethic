@@ -2,11 +2,12 @@ import { sfcompactdisplaybold, sfprotextregular, sfprotextsemibold } from "@/lib
 import { cn } from "@/lib/utils";
 import "./index.css";
 
-interface OtherTipProps {
+interface TrendTipProps {
   title: string;
+  category: string;
 }
 
-const Other_Tip = ({ title }: OtherTipProps) => {
+const Trend_Tip = ({ title, category }: TrendTipProps) => {
   return (
     <div className="w-[540px] h-[675px] bg-black relative">
       <div className="absolute left-6 bottom-24 flex flex-col items-start justify-end gap-2">
@@ -28,4 +29,4 @@ const Other_Tip = ({ title }: OtherTipProps) => {
   );
 };
 
-export default Other_Tip;
+export default Trend_Tip;
