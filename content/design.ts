@@ -21,7 +21,7 @@ export async function buildDesign(category: string, data: { id: string; content:
 
   try {
     // Generiere den Pfad zur Komponente, die gerendert werden soll
-    const { stdout } = await execPromise(`node render.js ${partNumber} ${componentFile}`);
+    const { stdout } = await execPromise(`node ./content/render.js ${partNumber} ${componentFile}`);
     console.log(stdout);
     const screenshotPath = `${category.toLowerCase()}_part_${partNumber}.png`;
     return screenshotPath;
