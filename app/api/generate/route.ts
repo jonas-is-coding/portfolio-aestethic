@@ -16,12 +16,14 @@ export async function POST(req: NextRequest) {
       content,
     });
 
+    console.log("Design: ", design)
+
     const imageUrl = await upload(design!)
 
     console.log("Image URL:", imageUrl);
 
     if (imageUrl) {
-      await sendMessage(content, `./screenshots/${imageUrl}`);
+      await sendMessage(content, imageUrl);
       console.log("Message sent with image.");
     } else {
       await sendMessage(content);

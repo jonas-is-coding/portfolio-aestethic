@@ -20,8 +20,8 @@ export async function upload(imagePath: string) {
 
   const data = await response.json() as { success: boolean; data: { link: string } };
   if (data.success) {
-    console.log('Bild erfolgreich hochgeladen:', data.data.link); // URL des hochgeladenen Bildes
-    return data.data.link;
+    console.log('Bild erfolgreich hochgeladen:', data.data.link);
+    return data.data.link
   } else {
     throw new Error(`Fehler beim Hochladen: ${JSON.stringify(data)}`);
   }
