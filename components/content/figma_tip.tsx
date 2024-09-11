@@ -19,7 +19,7 @@ const Figma_Tip = ({ partNumber }: FigmaTipProps) => {
         <p className="text-[16px]">UI UX Design</p>
         <p className="text-[16px] flex items-center justify-end gap-1">
           Tell your friends
-          <img src="./arrows.png" className="h-[8px] mt-1" />
+          <img src="/arrows.png" className="h-[8px] mt-1" />
         </p>
       </header>
       <div
@@ -50,11 +50,11 @@ const Figma_Tip = ({ partNumber }: FigmaTipProps) => {
         className="absolute left-0 top-20 size-[370px] z-0 blur-3xl"
       />
       <img
-        src="./save-now.png"
+        src="/save-now.png"
         className="absolute top-[430px] w-[280px] h-[108px] z-50"
       />
       <img
-        src="./figma-logo.png"
+        src="/figma-logo.png"
         className="h-[260px] w-[187px] absolute bottom-0 right-2"
       />
     </div>

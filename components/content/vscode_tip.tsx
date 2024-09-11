@@ -19,7 +19,7 @@ const VSCode_Tip = ({ partNumber }: VSCodeTipProps) => {
         <p className="text-[16px]">UI UX Design</p>
         <p className="text-[16px] flex items-center justify-end gap-1">
           Tell your friends
-          <img src="./arrows.png" className="h-[8px] mt-1" />
+          <img src="/arrows.png" className="h-[8px] mt-1" />
         </p>
       </header>
       <div
@@ -46,8 +46,8 @@ const VSCode_Tip = ({ partNumber }: VSCodeTipProps) => {
         src="/blur.png"
         className="absolute left-0 top-20 size-[370px] z-0 blur-3xl"
       />
-      <img src="./save-now.png" className="absolute top-[425px] w-[280px] h-[108px] z-50" />
-      <img src="./vscode-logo.png" className="h-[243px] w-[240px] absolute bottom-0 right-2" />
+      <img src="/save-now.png" className="absolute top-[425px] w-[280px] h-[108px] z-50" />
+      <img src="/vscode-logo.png" className="h-[243px] w-[240px] absolute bottom-0 right-2" />
     </div>
   );
 };
