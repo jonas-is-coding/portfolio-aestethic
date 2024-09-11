@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
-async function renderComponent(partNumber, componentFile) {
+async function renderComponent(identifier, componentFile) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -12,10 +12,7 @@ async function renderComponent(partNumber, componentFile) {
 
   // Lade die React-App
   await page.goto(
-    "https://jonasbrahmst.vercel.app/screenshot/" +
-      componentFile +
-      "/" +
-      partNumber
+    `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${identifier}`
   ); // Stelle sicher, dass die URL korrekt ist
 
   // Warte, bis die Seite geladen ist
@@ -30,7 +27,7 @@ async function renderComponent(partNumber, componentFile) {
   // Nimm einen Screenshot des gesamten Inhalts, der dem Viewport entspricht
   const screenshotPath = path.join(
     screenshotsDir,
-    `${componentFile}_part_${partNumber}.png`
+    `${componentFile}_${identifier}.png`
   );
   await page.screenshot({ path: screenshotPath });
 
@@ -38,10 +35,10 @@ async function renderComponent(partNumber, componentFile) {
   return screenshotPath;
 }
 
-const partNumber = process.argv[2];
+const identifier = process.argv[2];
 const componentFile = process.argv[3];
 
-renderComponent(partNumber, componentFile)
+renderComponent(identifier, componentFile)
   .then((screenshotPath) =>
     console.log(`Screenshot gespeichert unter: ${screenshotPath}`)
   )
