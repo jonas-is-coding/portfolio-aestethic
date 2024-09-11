@@ -12,7 +12,7 @@ async function renderComponent(identifier, componentFile) {
 
   // Lade die React-App
   await page.goto(
-    `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${identifier}`
+    `${process.env.NEXT_PUBLIC_URL}/screenshot/${componentFile}/${identifier}`
   ); // Stelle sicher, dass die URL korrekt ist
 
   // Warte, bis die Seite geladen ist
