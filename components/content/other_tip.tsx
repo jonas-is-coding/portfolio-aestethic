@@ -8,7 +8,7 @@ const Other_Tip = () => {
         <div className="w-[540px] h-[675px] bg-black border border-red-500 relative">
             <div className="absolute left-6 bottom-24 flex flex-col items-start justify-end gap-2">
             <img src="./save-swipe.png" className="w-[143px] h-[98px]" />
-            <h3 className={cn("text-[92px] z-40 leading-[0.9] bg-gradient-to-br from-gray-50 via-amber-500 to-gray-50 bg-clip-text text-transparent", sfcompactdisplaybold.className)}>
+            <h3 className={cn("text-[92px] z-40 leading-[0.9] uppercase bg-gradient-to-br from-gray-50 via-amber-500 to-gray-50 bg-clip-text text-transparent", sfcompactdisplaybold.className)}>
             4 Tips To IMPROVE WEB DESIGN
             </h3>
             </div>

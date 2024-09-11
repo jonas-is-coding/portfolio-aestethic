@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createContent } from "@/lib/content";
-import { buildDesign } from "@/lib/design";
-import { sendMessage } from "@/lib/message";
+import { createContent } from "@/content/content";
+import { buildDesign } from "@/content/design";
+import { sendMessage } from "@/content/message";
 
 export async function POST(req: NextRequest) {
   try {

@@ -10,27 +10,24 @@ Der Inhalt soll präzise und direkt umsetzbar sein. Der Inhalt soll in die folge
 export const categoryFormats: Record<string, string> = {
   "Figma_Tip": `
 1. **Figma_Tip**: 
-   - **Text**: Der Haupttext des Tipps für Figma.
    - **Part**: Part {figma_part}
 `,
   "VSCode_Tip": `
 2. **VSCode_Tip**:
-   - **Text**: Der Haupttext des Tipps für VSCode.
    - **Part**: Part {vscode_part}
-`,
+`,/* 
   "Trend_Tip": `
 3. **Trend_Tip**:
-   - **Title**: Der Titel des Trends.
+   - **Title**: Der Titel des Trends ().
    - **Category**: Die Kategorie des Trends.
-`,
+`, */
   "Other_Tip": `
-4. **Other_Tip**:
-   - **Title**: Der Titel des Tipps.
-   - **Content**: Der Hauptinhalt des Tipps.
-`,
+3. **Other_Tip**:
+   - **Title**: Der Titel des Tipps (maximal 25 buchstaben, pro wort maximal 8 buchstaben).
+`,/* 
   "Content_Tip": `
 5. **Content_Tip**:
    - **Title**: Der Titel des Tipps.
    - **Content**: Der Hauptinhalt des Tipps.
-`
+` */
 };

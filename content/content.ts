@@ -19,9 +19,9 @@ export async function createContent(): Promise<string> {
   const categories = [
     "Figma_Tip",
     "VSCode_Tip",
-    "Trend_Tip",
+    /* "Trend_Tip", */
     "Other_Tip",
-    "Content_Tip",
+    /* "Content_Tip", */
   ];
 
   const chosenCategory =
