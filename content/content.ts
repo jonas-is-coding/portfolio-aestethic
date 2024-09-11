@@ -15,7 +15,7 @@ export async function createContent(chosenCategory: string): Promise<string> {
       temperature: 0.9,
       topP: 1,
       topK: 1,
-      maxOutputTokens: 1600,
+      maxOutputTokens: 1500,
     };
 
   const categoryFormat = categoryFormats[chosenCategory];

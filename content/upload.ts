@@ -1,28 +1,25 @@
-import fetch from 'node-fetch';
+import cloudinary from 'cloudinary';
 import fs from 'fs';
+import path from 'path';
 
-// Funktion zum Hochladen eines Bildes zu Imgur
+// Cloudinary-Konfiguration
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Funktion zum Hochladen eines Bildes zu Cloudinary
 export async function upload(imagePath: string) {
-  const clientId = process.env.IMGUR_CLIENT_ID;
-  const image = fs.readFileSync(imagePath, { encoding: 'base64' }); 
-
-  const response = await fetch('https://api.imgur.com/3/image', {
-    method: 'POST',
-    headers: {
-      Authorization: `Client-ID ${clientId}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      image: image,
-      type: 'base64',
-    }),
-  });
-
-  const data = await response.json() as { success: boolean; data: { link: string } };
-  if (data.success) {
-    console.log('Bild erfolgreich hochgeladen:', data.data.link);
-    return data.data.link
-  } else {
-    throw new Error(`Fehler beim Hochladen: ${JSON.stringify(data)}`);
+  try {
+    const result = await cloudinary.v2.uploader.upload(imagePath, {
+      // Optional: Du kannst weitere Upload-Optionen hier angeben
+      // z.B. folder: 'my_folder', tags: 'my_tag'
+    });
+    console.log('Bild erfolgreich hochgeladen:', result.secure_url);
+    return result.secure_url;
+  } catch (error: any) {
+    console.error('Fehler beim Hochladen:', error);
+    throw new Error(`Fehler beim Hochladen: ${error.message}`);
   }
 }
