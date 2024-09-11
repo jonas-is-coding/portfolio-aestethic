@@ -55,6 +55,9 @@ export async function createContent(): Promise<string> {
   const result = await model.generateContent(categoryPrompt);
   const response = await result.response;
 
+  console.log("Response: " + response)
+  console.log("Response Text: " + response.text)
+
   // Überprüfe, ob response.text eine Funktion ist
   if (typeof response.text === "function") {
     const responseText = (response.text as unknown as () => string)();
