@@ -3,7 +3,11 @@ import { integralcf } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import "./index.css";
 
-const Figma_Tip = () => {
+interface FigmaTipProps {
+  partNumber: number;
+}
+
+const Figma_Tip = ({ partNumber }: FigmaTipProps) => {
   return (
     <div className="w-[540px] h-[675px] bg-black border border-red-500 relative">
       <header
@@ -28,7 +32,7 @@ const Figma_Tip = () => {
           Quick Figma Tips
         </h3>
         <span className="text-[70px] z-30 text-black text-stroke text-stroke-white">
-          Part 1
+          Part {partNumber}
         </span>
       </div>
       <div className="w-full h-[210px] absolute bottom-0 left-0 bg-gradient-to-t from-black to-black/0 z-40"></div>
