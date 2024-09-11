@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({
-      message: "Content generated and sent successfully!",
+      message: "Content generated and sent successfully!" + content,
     });
   } catch (error) {
     console.error("Error in handler:", error);

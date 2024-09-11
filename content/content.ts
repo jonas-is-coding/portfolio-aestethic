@@ -55,8 +55,10 @@ export async function createContent(): Promise<string> {
   const result = await model.generateContent(categoryPrompt);
   const response = await result.response;
 
-  console.log("Response: " + response)
-  console.log("Response Text: " + response.text)
+  console.log("Raw Response:", response);
+  
+  console.log("Response Type:", typeof response);
+  console.log("Response Properties:", Object.keys(response));
 
   // Überprüfe, ob response.text eine Funktion ist
   if (typeof response.text === "function") {
