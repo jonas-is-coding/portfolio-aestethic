@@ -8,18 +8,10 @@ export async function sendMessage(message: string, imageUrl?: string) {
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const client = twilio(accountSid, authToken);
 
-  if (imageUrl) {
-    await client.messages.create({
-      from: "whatsapp:+14155238886",
-      body: message,
-      to: `whatsapp:${process.env.PHONE_NUMBER}`,
-      mediaUrl: [imageUrl],
-    });
-  } else {
-    await client.messages.create({
-      from: "whatsapp:+14155238886",
-      to: `whatsapp:${process.env.PHONE_NUMBER}`,
-      body: message,
-    });
-  }
+  await client.messages.create({
+    from: "whatsapp:+14155238886",
+    body: message,
+    to: `whatsapp:${process.env.PHONE_NUMBER}`,
+    mediaUrl: [imageUrl!],
+  });
 }

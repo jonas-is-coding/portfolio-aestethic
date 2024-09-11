@@ -4,7 +4,7 @@ import { basePrompt, categoryFormats } from "./prompts";
 let currentVscodePart = 1;
 let currentFigmaPart = 1;
 
-export async function createContent(): Promise<string> {
+export async function createContent(chosenCategory: string): Promise<string> {
   try {
     const gemini_key = process.env.GEMINI_KEY;
     if (!gemini_key) throw new Error("GEMINI_KEY is not defined.");
@@ -18,14 +18,7 @@ export async function createContent(): Promise<string> {
       maxOutputTokens: 1600,
     };
 
-    const categories = [
-      "Figma_Tip",
-      "VSCode_Tip",
-      "Other_Tip",
-    ];
-
-    const chosenCategory = categories[Math.floor(Math.random() * categories.length)];
-    const categoryFormat = categoryFormats[chosenCategory];
+  const categoryFormat = categoryFormats[chosenCategory];
 
     let partNumber = "";
     if (chosenCategory === "VSCode_Tip") {

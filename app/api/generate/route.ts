@@ -8,10 +8,18 @@ export async function POST(req: NextRequest) {
   try {
     console.log("Starting POST request...");
 
-    const content = await createContent();
+    const categories = [
+      "Figma_Tip",
+      "VSCode_Tip",
+      /* "Other_Tip", */
+    ];
+
+    const chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+
+    const content = await createContent(chosenCategory);
     console.log("Content created:", content);
 
-    const design = await buildDesign("Figma_Tip", content);
+    const design = await buildDesign(chosenCategory, content);
 
     console.log("Design: ", design)
 
