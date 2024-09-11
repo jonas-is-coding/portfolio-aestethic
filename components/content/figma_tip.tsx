@@ -12,50 +12,50 @@ const Figma_Tip = ({ partNumber }: FigmaTipProps) => {
     <div className="w-[1080px] h-[1350px] bg-black relative">
       <header
         className={cn(
-          "absolute top-0 left-0 w-full flex items-center justify-between px-6 pt-8 text-white",
+          "absolute top-0 left-0 w-full flex items-center justify-between px-12 pt-16 text-white",
           integralcf.className
         )}
       >
-        <p className="text-[16px]">UI UX Design</p>
-        <p className="text-[16px] flex items-center justify-end gap-1">
+        <p className="text-[32px]">UI UX Design</p>
+        <p className="text-[32px] flex items-center justify-end gap-2">
           Tell your friends
-          <img src="/arrows.png" className="h-[8px] mt-1" />
+          <img src="/arrows.png" className="h-[16px] mt-2" />
         </p>
       </header>
       <div
         className={cn(
-          "flex flex-col items-start justify-center absolute top-28 left-6 -space-y-4",
+          "flex flex-col items-start justify-center absolute top-56 left-12 -space-y-8",
           neutralfacebold.className
         )}
       >
-        <h3 className="text-[118px] z-40 leading-[1.05] text-white">
+        <h3 className="text-[236px] z-40 leading-[1.05] text-white">
           Quick Figma Tips
         </h3>
-        <span className="text-[70px] z-30 text-black text-stroke text-stroke-white">
+        <span className="text-[140px] z-30 text-black text-stroke text-stroke-white">
           Part {partNumber}
         </span>
       </div>
-      <div className="w-full h-[210px] absolute bottom-0 left-0 bg-gradient-to-t from-black to-black/0 z-40"></div>
+      <div className="w-full h-[420px] absolute bottom-0 left-0 bg-gradient-to-t from-black to-black/0 z-40"></div>
       <p
         className={cn(
-          "absolute bottom-8 left-6 flex flex-col items-start justify-end z-50",
+          "absolute bottom-16 left-12 flex flex-col items-start justify-end z-50",
           integralcf.className
         )}
       >
-        <span className="text-white text-[16px]">Jonas Brahmst</span>
-        <span className="text-white/40 text-[10px]">Developer</span>
+        <span className="text-white text-[32px]">Jonas Brahmst</span>
+        <span className="text-white/40 text-[20px]">Developer</span>
       </p>
       <img
         src="/blur.png"
-        className="absolute left-0 top-20 size-[370px] z-0 blur-3xl"
+        className="absolute left-0 top-40 size-[740px] z-0 blur-3xl"
       />
       <img
         src="/save-now.png"
-        className="absolute top-[430px] w-[280px] h-[108px] z-50"
+        className="absolute top-[860px] w-[560px] h-[216px] z-50"
       />
       <img
         src="/figma-logo.png"
-        className="h-[260px] w-[187px] absolute bottom-0 right-2"
+        className="h-[520px] w-[374px] absolute bottom-0 right-4"
       />
     </div>
   );
