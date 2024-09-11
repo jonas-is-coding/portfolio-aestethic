@@ -7,7 +7,7 @@ async function renderComponent(partNumber, componentFile) {
   const page = await browser.newPage();
 
   // Lade die React-App
-  await page.goto('https://your-vercel-url/screenshot/' + componentFile + '/' + partNumber); // Stelle sicher, dass die URL korrekt ist
+  await page.goto('https://jonasbrahmst.vercel.app/screenshot/' + componentFile + '/' + partNumber); // Stelle sicher, dass die URL korrekt ist
 
   // Warte, bis die Seite geladen ist
   await page.waitForTimeout(3000); // Warte 3 Sekunden, um sicherzustellen, dass alles geladen ist
