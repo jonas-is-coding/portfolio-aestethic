@@ -3,25 +3,31 @@ import { promisify } from 'util';
 
 const execPromise = promisify(exec);
 
-type ComponentMapping = {
-  [key: string]: string;
-};
+export async function buildDesign(category: string, content: string): Promise<string | null> {
+  const partNumber = content.split('Part ').pop() || '';
 
-const componentMapping: ComponentMapping = {
-  Figma_Tip: "Figma_Tip",
-  VSCode_Tip: "VSCode_Tip",
-  Other_Tip: "Other_Tip",
-};
+  console.log("Part number: ", partNumber)
 
-export async function buildDesign(category: string, data: { id: string; content: string }): Promise<string | null> {
-  const partNumber = data.content.split('Part ').pop() || '';
-  
-  const componentFile = componentMapping[category] || "Figma_Tip";
+  let componentFile: string;
+
+  switch (category) {
+    case "Figma_Tip":
+      componentFile = "Figma_Tip";
+      break;
+    case "VSCode_Tip":
+      componentFile = "VSCode_Tip";
+      break;
+    case "Other_Tip":
+      componentFile = "Other_Tip";
+      break;
+    default:
+      return null;
+  }
 
   try {
-    const { stdout } = await execPromise(`node ./content/render.js ${partNumber} ${componentFile}`);
-    console.log(stdout);
-    const screenshotPath = `${category.toLowerCase()}_part_${partNumber}.png`;
+    const { stdout } = await execPromise(`node ./content/render.js ${partNumber} Figma_Tip`);
+    console.log("STDOUT: ", stdout);
+    const screenshotPath = `Figma_Tip_part_${partNumber}.png`;
     return screenshotPath;
   } catch (error) {
     console.error('Fehler beim Rendern der Komponente:', error);

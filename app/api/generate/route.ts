@@ -11,10 +11,7 @@ export async function POST(req: NextRequest) {
     const content = await createContent();
     console.log("Content created:", content);
 
-    const design = await buildDesign("Figma_Tip", {
-      id: "figma_text_id",
-      content,
-    });
+    const design = await buildDesign("Figma_Tip", content);
 
     console.log("Design: ", design)
 
