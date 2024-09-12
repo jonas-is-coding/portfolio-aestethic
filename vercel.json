@@ -5,12 +5,11 @@
       "schedule": "0 7 * * *"
     }
   ],
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
+  "functions": {
+    "api/generate.ts": {
+      "maxDuration": 60
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -20,13 +19,5 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "out",
-  "functions": {
-    "api/generate.ts": {
-      "maxDuration": 60
-    }
-  }
+  ]
 }
