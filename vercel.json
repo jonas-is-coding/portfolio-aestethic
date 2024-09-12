@@ -23,5 +23,10 @@
   ],
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "outputDirectory": "out"
+  "outputDirectory": "out",
+  "functions": {
+    "api/generate.ts": {
+      "maxDuration": 60
+    }
+  }
 }
