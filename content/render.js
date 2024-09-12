@@ -1,5 +1,5 @@
-const puppeteer = require("puppeteer-core");
 const chromium = require("@sparticuz/chromium");
+const puppeteer = require("puppeteer-core");
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
