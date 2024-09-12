@@ -6,7 +6,7 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function uploadPartNumbers(partNumbers: { vscodePart: number, figmaPart: number }){
+export async function uploadPartNumbers(partNumbers: { vscodePart: number, figmaPart: number }) {
   const jsonString = JSON.stringify(partNumbers);
   
   return new Promise((resolve, reject) => {
@@ -30,6 +30,7 @@ export async function loadPartNumbers(): Promise<{ vscodePart: number, figmaPart
   try {
     const response = await fetch(jsonUrl);
     const data = await response.json();
+    console.log("Loaded part numbers:", data); // Debugging
     return data;
   } catch (error) {
     console.error("Error loading part numbers:", error);

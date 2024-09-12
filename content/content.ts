@@ -1,11 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { basePrompt, categoryFormats } from "./prompts";
-import path from "path";
 import { loadPartNumbers, uploadPartNumbers } from "./parts";
 
 export async function createContent(chosenCategory: string): Promise<string> {
   try {
     const partNumbers = await loadPartNumbers();
+    console.log("Initial part numbers:", partNumbers); // Debugging
 
     let partNumber = "";
     if (chosenCategory === "VSCode_Tip") {
@@ -15,6 +15,8 @@ export async function createContent(chosenCategory: string): Promise<string> {
       partNumber = `${partNumbers.figmaPart}`;
       partNumbers.figmaPart++;
     }
+
+    console.log("Updated part numbers:", partNumbers); // Debugging
 
     await uploadPartNumbers(partNumbers);
 
