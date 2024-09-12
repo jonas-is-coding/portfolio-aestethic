@@ -7,6 +7,9 @@ export async function design(
   const partNumberMatch = content.match(/Part (\d+)/);
   const partNumber = partNumberMatch ? partNumberMatch[1] : "";
 
+  const titleMatch = content.match(/Title (\d+)/);
+  const title = titleMatch ? titleMatch[1] : "";
+
   console.log("Part number: ", partNumber);
 
   let componentFile: string;
@@ -28,7 +31,7 @@ export async function design(
   try {
     console.log("Trying to render component file: ", componentFile);
 
-    const stdout = await renderComponent(partNumber, componentFile);
+    const stdout = await renderComponent(partNumber ? partNumber : title, componentFile);
     console.log("STDOUT: ", stdout);
 
     const screenshotPath = `/tmp/screenshots/${category}_part_${partNumber}.png`;
