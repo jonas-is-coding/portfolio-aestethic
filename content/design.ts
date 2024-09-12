@@ -28,16 +28,12 @@ export async function buildDesign(
 
   try {
     console.log("Trying to render component file: ", componentFile);
-    
+
     const stdout = await renderComponent(partNumber, componentFile);
     console.log("STDOUT: ", stdout);
 
-    const screenshotPath = path.join(
-      "/tmp",
-      `${category}_part_${partNumber}.png`
-    );
+    const screenshotPath = `/tmp/${category}_part_${partNumber}.png`;
 
-    // Stelle sicher, dass der Screenshot gespeichert wurde
     return screenshotPath;
   } catch (error) {
     console.error("Fehler beim Rendern der Komponente:", error);
