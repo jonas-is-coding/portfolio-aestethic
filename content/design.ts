@@ -1,13 +1,17 @@
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
-import fs from 'fs';
+import { exec } from "child_process";
+import { promisify } from "util";
+import path from "path";
+import fs from "fs";
+import { renderComponent } from "@/render";
 
 const execPromise = promisify(exec);
 
-export async function buildDesign(category: string, content: string): Promise<string | null> {
+export async function buildDesign(
+  category: string,
+  content: string
+): Promise<string | null> {
   const partNumberMatch = content.match(/Part (\d+)/);
-  const partNumber = partNumberMatch ? partNumberMatch[1] : '';
+  const partNumber = partNumberMatch ? partNumberMatch[1] : "";
 
   console.log("Part number: ", partNumber);
 
@@ -28,24 +32,19 @@ export async function buildDesign(category: string, content: string): Promise<st
   }
 
   try {
-    const renderScriptPath = path.join(process.cwd(), 'render.mjs');
-
-    if (!fs.existsSync(renderScriptPath)) {
-      console.error('Render-Skript nicht gefunden:', renderScriptPath);
-      return null;
-    }
-    
-    console.log(`Command: node ${renderScriptPath} ${partNumber} ${componentFile}`);
-    const { stdout } = await execPromise(`node ${renderScriptPath} ${partNumber} ${componentFile}`);
+    const stdout = await renderComponent(partNumber, componentFile);
     console.log("STDOUT: ", stdout);
-    
+
     // Nutze den temporären Ordner in Vercel
-    const screenshotPath = path.join('/tmp', `${category}_part_${partNumber}.png`);
-    
+    const screenshotPath = path.join(
+      "/tmp",
+      `${category}_part_${partNumber}.png`
+    );
+
     // Stelle sicher, dass der Screenshot gespeichert wurde
     return screenshotPath;
   } catch (error) {
-    console.error('Fehler beim Rendern der Komponente:', error);
+    console.error("Fehler beim Rendern der Komponente:", error);
     return null;
   }
 }
