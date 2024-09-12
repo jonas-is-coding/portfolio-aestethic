@@ -1,19 +1,18 @@
-const chromium = require('chrome-aws-lambda');
+const { chromium } = require('playwright-core');
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
 async function renderComponent(partNumber, componentFile) {
-  const browser = await chromium.puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+  const browser = await chromium.connect({
+    wsEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`
   });
 
-  const page = await browser.newPage();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
   // Setze die Viewport-Größe auf die Größe deiner Komponenten
-  await page.setViewport({ width: 1080, height: 1350 });
+  await page.setViewportSize({ width: 1080, height: 1350 });
 
   // Lade die React-App
   await page.goto(
@@ -21,7 +20,7 @@ async function renderComponent(partNumber, componentFile) {
     componentFile +
     "/" +
     partNumber
-  ); // Stelle sicher, dass die URL korrekt ist
+  );
 
   // Warte, bis die Seite geladen ist
   await setTimeout(3000);
