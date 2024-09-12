@@ -1,20 +1,20 @@
-const playwright = require('playwright-core');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
 async function renderComponent(partNumber, componentFile) {
-  const browser = await playwright.chromium.launch({
-    args: ['--no-sandbox']
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
   });
 
-  const context = await browser.newContext();
-  const page = await context.newPage();
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1080, height: 1350 });
 
-  // Setze die Viewport-Größe auf die Größe deiner Komponenten
-  await page.setViewportSize({ width: 1080, height: 1350 });
-
-  // Lade die React-App
   await page.goto(
     "https://jonasbrahmst.vercel.app/screenshot/" +
     componentFile +
@@ -22,16 +22,13 @@ async function renderComponent(partNumber, componentFile) {
     partNumber
   );
 
-  // Warte, bis die Seite geladen ist
   await setTimeout(3000);
 
-  // Erstelle das Verzeichnis, falls es nicht existiert
   const screenshotsDir = path.join('/tmp', "screenshots");
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir, { recursive: true });
   }
 
-  // Nimm einen Screenshot des gesamten Inhalts, der dem Viewport entspricht
   const screenshotPath = path.join(
     screenshotsDir,
     `${componentFile}_part_${partNumber}.png`
