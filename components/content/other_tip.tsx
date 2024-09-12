@@ -8,7 +8,7 @@ interface OtherTipProps {
 
 const Other_Tip = ({ title }: OtherTipProps) => {
   return (
-    <div className="w-[1080px] h-[1350px] bg-black relative">
+    <div id="item" className="w-[1080px] h-[1350px] bg-black relative">
       <div className="absolute left-12 bottom-48 flex flex-col items-start justify-end gap-4">
         <img src="/save-swipe.png" className="w-[286px] h-[196px]" />
         <h3 className={cn("text-[184px] z-40 leading-[0.9] uppercase bg-gradient-to-br from-gray-50 via-amber-500 to-gray-50 bg-clip-text text-transparent", sfcompactdisplaybold.className)}>

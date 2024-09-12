@@ -1,5 +1,5 @@
 import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 
@@ -19,11 +19,10 @@ export async function renderComponent(partNumber: string, componentFile: string)
 
   await page.goto(
     `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${partNumber}`,
-    { waitUntil: 'networkidle0' } // Sicherstellen, dass alle Netzwerkverbindungen inaktiv sind
+    { waitUntil: 'networkidle0' }
   );
 
-  // Warten, bis ein spezifisches Element sichtbar ist
-  await page.waitForSelector('body'); 
+  await page.waitForSelector('#item'); 
 
   const screenshotsDir = path.join('/tmp', 'screenshots');
   if (!fs.existsSync(screenshotsDir)) {
