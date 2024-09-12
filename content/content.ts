@@ -1,29 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { basePrompt, categoryFormats } from "./prompts";
-import fs from "fs";
 import path from "path";
-
-const partNumbersPath = path.join(__dirname, "parts.json");
-
-function loadPartNumbers() {
-  if (fs.existsSync(partNumbersPath)) {
-    return JSON.parse(fs.readFileSync(partNumbersPath, "utf-8"));
-  } else {
-    return { vscodePart: 1, figmaPart: 1 };
-  }
-}
-
-// Funktion zum Speichern der Part-Nummern
-function savePartNumbers(partNumbers: {
-  vscodePart: number;
-  figmaPart: number;
-}) {
-  fs.writeFileSync(partNumbersPath, JSON.stringify(partNumbers), "utf-8");
-}
+import { loadPartNumbers, uploadPartNumbers } from "./parts";
 
 export async function createContent(chosenCategory: string): Promise<string> {
   try {
-    const partNumbers = loadPartNumbers();
+    const partNumbers = await loadPartNumbers();
 
     let partNumber = "";
     if (chosenCategory === "VSCode_Tip") {
@@ -34,7 +16,7 @@ export async function createContent(chosenCategory: string): Promise<string> {
       partNumbers.figmaPart++;
     }
 
-    savePartNumbers(partNumbers);
+    await uploadPartNumbers(partNumbers);
 
     const categoryFormat = categoryFormats[chosenCategory];
 
