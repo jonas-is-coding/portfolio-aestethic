@@ -4,5 +4,17 @@
       "path": "/api/generate",
       "schedule": "0 7 * * *"
     }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
   ]
 }
