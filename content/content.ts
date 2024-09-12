@@ -1,4 +1,4 @@
-import { GenerativeModel, GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { basePrompt, categoryFormats } from "./prompts";
 
 let currentVscodePart = 1;

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createContent } from "@/content/content";
-import { buildDesign } from "@/content/design";
+import { design } from "@/content/design";
 import { sendMessage } from "@/content/message";
 import { upload } from "@/content/upload";
 
@@ -19,11 +19,11 @@ export async function POST(req: NextRequest) {
     const content = await createContent(chosenCategory);
     console.log("Content created:", content);
 
-    const design = await buildDesign(chosenCategory, content);
+    const pathname = await design(chosenCategory, content);
 
-    console.log("Design: ", design)
+    console.log("Design Pathname: ", pathname)
 
-    const imageUrl = await upload(design!)
+    const imageUrl = await upload(pathname!)
 
     console.log("Image URL:", imageUrl);
 

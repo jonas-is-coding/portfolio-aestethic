@@ -1,7 +1,6 @@
-import path from "path";
 import { renderComponent } from "@/content/render";
 
-export async function buildDesign(
+export async function design(
   category: string,
   content: string
 ): Promise<string | null> {
@@ -32,7 +31,7 @@ export async function buildDesign(
     const stdout = await renderComponent(partNumber, componentFile);
     console.log("STDOUT: ", stdout);
 
-    const screenshotPath = `/tmp/${category}_part_${partNumber}.png`;
+    const screenshotPath = `/tmp/screenshots/${category}_part_${partNumber}.png`;
 
     return screenshotPath;
   } catch (error) {
