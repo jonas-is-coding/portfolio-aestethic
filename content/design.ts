@@ -1,10 +1,5 @@
-import { exec } from "child_process";
-import { promisify } from "util";
 import path from "path";
-import fs from "fs";
 import { renderComponent } from "@/content/render";
-
-const execPromise = promisify(exec);
 
 export async function buildDesign(
   category: string,
@@ -32,10 +27,11 @@ export async function buildDesign(
   }
 
   try {
+    console.log("Trying to render component file: ", componentFile);
+    
     const stdout = await renderComponent(partNumber, componentFile);
     console.log("STDOUT: ", stdout);
 
-    // Nutze den temporären Ordner in Vercel
     const screenshotPath = path.join(
       "/tmp",
       `${category}_part_${partNumber}.png`
