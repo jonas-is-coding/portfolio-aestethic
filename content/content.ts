@@ -4,16 +4,29 @@ import { loadPartNumbers, uploadPartNumbers } from "./parts";
 
 export async function createContent(chosenCategory: string): Promise<string> {
   try {
-    const partNumbers = await loadPartNumbers();
-    console.log("Initial part numbers:", partNumbers); 
+    let partNumbers = { vscodePart: 1, figmaPart: 1 };
+    let title: string | undefined;
 
-    let partNumber = "";
-    if (chosenCategory === "VSCode_Tip") {
-      partNumber = `${partNumbers.vscodePart}`;
-      partNumbers.vscodePart++;
-    } else if (chosenCategory === "Figma_Tip") {
-      partNumber = `${partNumbers.figmaPart}`;
-      partNumbers.figmaPart++;
+    switch (chosenCategory) {
+      case "Figma_Tip":
+      case "VSCode_Tip":
+        partNumbers = await loadPartNumbers();
+        console.log("Initial part numbers:", partNumbers);
+
+        if (chosenCategory === "VSCode_Tip") {
+          partNumbers.vscodePart++;
+        } else if (chosenCategory === "Figma_Tip") {
+          partNumbers.figmaPart++;
+        }
+        
+        break;
+
+      case "Other_Tip":
+        title = "Title Placeholder";
+        break;
+
+      default:
+        throw new Error(`Unknown category: ${chosenCategory}`);
     }
 
     console.log("Updated part numbers:", partNumbers);
@@ -52,10 +65,6 @@ export async function createContent(chosenCategory: string): Promise<string> {
     const response = await result.response;
 
     console.log("Raw Response:", response);
-    console.log("Response Text:", response.text);
-
-    console.log("Figma Part: ", partNumbers.figmaPart)
-    console.log("VSCode Part: ", partNumbers.vscodePart)
 
     if (typeof response.text === "function") {
       const responseText = (response.text as unknown as () => string)();

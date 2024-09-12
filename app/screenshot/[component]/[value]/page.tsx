@@ -8,24 +8,21 @@ import Other_Tip from '@/components/content/other_tip';
 const ScreenshotPage = () => {
   const pathname = usePathname();
   const pathParts = pathname.split('/');
-  const component = pathParts[2]; // 'Figma_Tip', 'VSCode_Tip', or 'Other_Tip'
-  const value = pathParts[3]; // either 'partNumber' or 'title'
+  const component = pathParts[2];
+  const value = pathParts.slice(3).join('/');
 
-  let ComponentToRender = null;
+  let ComponentToRender: React.FC<any> | null = null;
   let props: any = {};
 
   switch (component) {
     case 'Figma_Tip':
-      ComponentToRender = Figma_Tip;
-      props = { partNumber: parseInt(value, 10) };
-      break;
     case 'VSCode_Tip':
-      ComponentToRender = VSCode_Tip;
+      ComponentToRender = component === 'Figma_Tip' ? Figma_Tip : VSCode_Tip;
       props = { partNumber: parseInt(value, 10) };
       break;
     case 'Other_Tip':
       ComponentToRender = Other_Tip;
-      props = { title: value };
+      props = { title: decodeURIComponent(value) };
       break;
     default:
       return <div>Invalid component</div>;
