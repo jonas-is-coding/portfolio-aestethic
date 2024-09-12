@@ -1,11 +1,11 @@
-const { chromium } = require('playwright-core');
+const playwright = require('playwright-core');
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 
 async function renderComponent(partNumber, componentFile) {
-  const browser = await chromium.connect({
-    wsEndpoint: `wss://chrome.browserless.io?token=${process.env.BROWSERLESS_TOKEN}`
+  const browser = await playwright.chromium.launch({
+    args: ['--no-sandbox']
   });
 
   const context = await browser.newContext();
