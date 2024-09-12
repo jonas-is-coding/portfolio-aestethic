@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const categories = [
       "Figma_Tip",
       "VSCode_Tip",
-      /* "Other_Tip", */
+      "Other_Tip",
     ];
 
     const chosenCategory = categories[Math.floor(Math.random() * categories.length)];
