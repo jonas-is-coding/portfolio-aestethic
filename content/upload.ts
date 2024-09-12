@@ -1,8 +1,12 @@
-import fs from "fs";
 import cloudinary from "cloudinary";
+import { readdir } from "fs/promises";
+import fs from "fs";
 
 export async function upload(imagePath: string) {
   try {
+    const files = await readdir("/tmp");
+    console.log("Files in /tmp:", files); // Logging
+
     if (!fs.existsSync(imagePath)) {
       throw new Error(`Datei nicht gefunden: ${imagePath}`);
     }
