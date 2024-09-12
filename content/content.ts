@@ -5,7 +5,7 @@ import { loadPartNumbers, uploadPartNumbers } from "./parts";
 export async function createContent(chosenCategory: string): Promise<string> {
   try {
     const partNumbers = await loadPartNumbers();
-    console.log("Initial part numbers:", partNumbers); // Debugging
+    console.log("Initial part numbers:", partNumbers); 
 
     let partNumber = "";
     if (chosenCategory === "VSCode_Tip") {
@@ -16,7 +16,7 @@ export async function createContent(chosenCategory: string): Promise<string> {
       partNumbers.figmaPart++;
     }
 
-    console.log("Updated part numbers:", partNumbers); // Debugging
+    console.log("Updated part numbers:", partNumbers);
 
     await uploadPartNumbers(partNumbers);
 
@@ -27,8 +27,8 @@ export async function createContent(chosenCategory: string): Promise<string> {
       .replace(
         "{category_format}",
         categoryFormat
-          .replace("{vscode_part}", partNumber)
-          .replace("{figma_part}", partNumber)
+          .replace("{vscode_part}", partNumbers.vscodePart.toString())
+          .replace("{figma_part}", partNumbers.figmaPart.toString())
       );
 
     const gemini_key = process.env.GEMINI_KEY;
@@ -53,6 +53,9 @@ export async function createContent(chosenCategory: string): Promise<string> {
 
     console.log("Raw Response:", response);
     console.log("Response Text:", response.text);
+
+    console.log("Figma Part: ", partNumbers.figmaPart)
+    console.log("VSCode Part: ", partNumbers.vscodePart)
 
     if (typeof response.text === "function") {
       const responseText = (response.text as unknown as () => string)();
