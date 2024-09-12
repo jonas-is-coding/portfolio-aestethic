@@ -1,6 +1,7 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
+import fs from 'fs';
 
 const execPromise = promisify(exec);
 
@@ -27,9 +28,15 @@ export async function buildDesign(category: string, content: string): Promise<st
   }
 
   try {
-    // Führe das Rendering-Skript aus
-    console.log(`Command: node ./content/render.js ${partNumber} ${componentFile}`)
-    const { stdout } = await execPromise(`node ./content/render.js ${partNumber} ${componentFile}`);
+    const renderScriptPath = path.join('/var/task/content', 'render.js');
+
+    if (!fs.existsSync(renderScriptPath)) {
+      console.error('Render-Skript nicht gefunden:', renderScriptPath);
+      return null;
+    }
+    
+    console.log(`Command: node ${renderScriptPath} ${partNumber} ${componentFile}`);
+    const { stdout } = await execPromise(`node ${renderScriptPath} ${partNumber} ${componentFile}`);
     console.log("STDOUT: ", stdout);
     
     // Nutze den temporären Ordner in Vercel
