@@ -2,7 +2,6 @@ import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
-import { setTimeout } from 'node:timers/promises';
 
 export async function renderComponent(partNumber: string, componentFile: string): Promise<string> {
   chromium.setGraphicsMode = false;
@@ -19,14 +18,16 @@ export async function renderComponent(partNumber: string, componentFile: string)
   await page.setViewport({ width: 1080, height: 1350 });
 
   await page.goto(
-    `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${partNumber}`
+    `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${partNumber}`,
+    { waitUntil: 'networkidle0' } // Sicherstellen, dass alle Netzwerkverbindungen inaktiv sind
   );
 
-  await setTimeout(3000);
+  // Warten, bis ein spezifisches Element sichtbar ist
+  await page.waitForSelector('body'); 
 
-  const screenshotsDir = path.join(__dirname, 'screenshots');
+  const screenshotsDir = path.join('/tmp', 'screenshots');
   if (!fs.existsSync(screenshotsDir)) {
-    fs.mkdirSync(screenshotsDir);
+    fs.mkdirSync(screenshotsDir, { recursive: true });
   }
 
   const screenshotPath = path.join(
@@ -35,5 +36,6 @@ export async function renderComponent(partNumber: string, componentFile: string)
   );
   await page.screenshot({ path: screenshotPath });
   await browser.close();
+
   return screenshotPath;
 }
