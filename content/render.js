@@ -1,12 +1,18 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer-core");
+const chromium = require("@sparticuz/chromium");
 const fs = require("fs");
 const path = require("path");
 const { setTimeout } = require("node:timers/promises");
 async function renderComponent(partNumber, componentFile) {
-  const browser = await puppeteer.launch({ 
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  chromium.setGraphicsMode = false;
+
+  browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
   });
+
   const page = await browser.newPage();
 
   await page.setViewport({ width: 1080, height: 1350 });
@@ -39,4 +45,4 @@ renderComponent(partNumber, componentFile)
   .then((screenshotPath) =>
     console.log(`Screenshot gespeichert unter: ${screenshotPath}`)
   )
-.catch((err) => console.error("Fehler beim Rendern:", err));
+  .catch((err) => console.error("Fehler beim Rendern:", err));
