@@ -22,7 +22,7 @@ export async function renderComponent(partNumber: string, componentFile: string)
     { waitUntil: 'networkidle0' }
   );
 
-  await page.waitForSelector('#item'); 
+  await page.waitForSelector('#item');
 
   const screenshotsDir = path.join('/tmp', 'screenshots');
   if (!fs.existsSync(screenshotsDir)) {
@@ -33,6 +33,9 @@ export async function renderComponent(partNumber: string, componentFile: string)
     screenshotsDir,
     `${componentFile}_part_${partNumber}.png`
   );
+  
+  console.log(`Saving screenshot to: ${screenshotPath}`); // Logging
+
   await page.screenshot({ path: screenshotPath });
   await browser.close();
 
