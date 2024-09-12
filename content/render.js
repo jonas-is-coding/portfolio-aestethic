@@ -1,8 +1,9 @@
-const chromium = require("@sparticuz/chromium");
-const puppeteer = require("puppeteer-core");
-const fs = require("fs");
-const path = require("path");
-const { setTimeout } = require("node:timers/promises");
+import chromium from "@sparticuz/chromium"
+import puppeteer from "puppeteer";
+import fs from "fs";
+import path from "path";
+import { setTimeout }from "node:timers/promises"
+
 async function renderComponent(partNumber, componentFile) {
   chromium.setGraphicsMode = false;
 
