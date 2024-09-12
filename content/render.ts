@@ -1,9 +1,12 @@
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer';
-import fs from 'fs';
-import path from 'path';
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer";
+import fs from "fs";
+import path from "path";
 
-export async function renderComponent(partNumber: string, componentFile: string): Promise<string> {
+export async function renderComponent(
+  partNumber: string,
+  componentFile: string
+): Promise<string> {
   chromium.setGraphicsMode = false;
 
   const browser = await puppeteer.launch({
@@ -19,12 +22,12 @@ export async function renderComponent(partNumber: string, componentFile: string)
 
   await page.goto(
     `https://jonasbrahmst.vercel.app/screenshot/${componentFile}/${partNumber}`,
-    { waitUntil: 'networkidle0' }
+    { waitUntil: "networkidle0" }
   );
 
-  await page.waitForSelector('#item');
+  await page.waitForSelector("#item");
 
-  const screenshotsDir = path.join('/tmp', 'screenshots');
+  const screenshotsDir = path.join("/tmp", "screenshots");
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir, { recursive: true });
   }
@@ -33,7 +36,7 @@ export async function renderComponent(partNumber: string, componentFile: string)
     screenshotsDir,
     `${componentFile}_part_${partNumber}.png`
   );
-  
+
   console.log(`Saving screenshot to: ${screenshotPath}`); // Logging
 
   await page.screenshot({ path: screenshotPath });
