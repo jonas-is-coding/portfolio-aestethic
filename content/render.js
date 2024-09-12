@@ -16,7 +16,7 @@ async function renderComponent(partNumber, componentFile) {
       componentFile +
       "/" +
       partNumber
-  ); 
+  );
 
   await setTimeout(3000);
 
