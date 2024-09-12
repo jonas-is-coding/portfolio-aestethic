@@ -1,8 +1,10 @@
 import cloudinary from 'cloudinary';
 
-const partNumbers = { vscodePart: 1, figmaPart: 1 };
-
-const jsonString = JSON.stringify(partNumbers);
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function uploadPartNumbers(partNumbers: { vscodePart: number, figmaPart: number }){
   const jsonString = JSON.stringify(partNumbers);
