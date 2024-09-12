@@ -28,7 +28,7 @@ export async function buildDesign(category: string, content: string): Promise<st
   }
 
   try {
-    const renderScriptPath = path.join('/var/task/content', 'render.js');
+    const renderScriptPath = path.join(process.cwd(), 'content', 'render.js');
 
     if (!fs.existsSync(renderScriptPath)) {
       console.error('Render-Skript nicht gefunden:', renderScriptPath);
