@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 
-const phrase = "Web development is the art of crafting digital experiences that captivate and inspire. From sleek user interfaces to robust backend systems, every line of code is a brushstroke on the canvas of the internet.";
+const phrase = "Coding is the art of creating digital solutions that solve problems and inspire innovation. From efficient algorithms to seamless user experiences, every line of code is a step towards building the future.";
 
 const Text = () => {
   const refs = useRef<(HTMLSpanElement | null)[]>([]);
